@@ -1,0 +1,47 @@
+# =====================================================================
+#  Sesión 4 · Bóveda inmutable (WORM) — 92-EAN
+#
+#  Dos servicios, dos formas de inmutabilidad:
+#    - minio      : almacenamiento de objetos S3 con Object Lock (WORM)
+#    - rest-server : servidor restic publicado en modo --append-only
+#
+#  100% local. Nada de esto sale de tu máquina. Credenciales de laboratorio
+#  (NO usar en producción). Levanta con:  docker compose up -d
+# =====================================================================
+
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: cr-minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: "labadmin"
+      MINIO_ROOT_PASSWORD: "labadmin123"
+    ports:
+      - "9000:9000"     # API S3
+      - "9001:9001"     # consola web (http://localhost:9001)
+    volumes:
+      - ./data/minio:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Servidor restic. Se publica en modo --append-only: el cliente puede
+  # hacer backup y restore, pero NO forget/prune. La poda la haría otro host.
+  rest-server:
+    image: restic/rest-server:latest
+    container_name: cr-rest
+    environment:
+      OPTIONS: "--no-auth --append-only"
+      DATA_DIRECTORY: "/data"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data/restic:/data
+    restart: unless-stopped
+
+# Los datos viven en ./data (montado al host) — ahí apunta AIDE (FIM) en la
+# Parte 3. Se ignora en git (ver .gitignore del módulo).

@@ -27,7 +27,7 @@ Elige tu setup (3 caminos): [`core/docs/SETUP-1-local-vm.md`](core/docs/SETUP-1-
 | 01 | [`01-ransomware-y-ciber-recuperacion/`](01-ransomware-y-ciber-recuperacion/) | Ransomware y ciber-recuperación — forense a mano + copiloto IA | ✅ Disponible |
 | 02 | [`02-analisis-de-integridad-datos/`](02-analisis-de-integridad-datos/) | Análisis de integridad (entropía, hashing difuso, scoring) | ✅ Disponible |
 | 03 | [`03-deteccion-variantes-yara-sigma-ia/`](03-deteccion-variantes-yara-sigma-ia/) | Detección de variantes con IA (YARA/Sigma) | ✅ Disponible |
-| 04 | [`04-boveda-inmutable-worm/`](04-boveda-inmutable-worm/) | Bóveda inmutable (MinIO Object Lock, restic/Borg) | ⏳ |
+| 04 | [`04-boveda-inmutable-worm/`](04-boveda-inmutable-worm/) | Bóveda inmutable (MinIO Object Lock, restic/Borg, FIM) | ✅ Disponible |
 | 05 | [`05-copiloto-recuperacion-rag/`](05-copiloto-recuperacion-rag/) | Copiloto de recuperación (RAG, Velociraptor, RTO/RPO) | ⏳ |
 
 ## Estructura del repositorio

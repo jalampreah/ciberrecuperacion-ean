@@ -1,0 +1,5 @@
+# Datos generados y volúmenes del lab (no versionar)
+data/
+datasets/caso4/
+/tmp/
+*.tar.gz
